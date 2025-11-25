@@ -6,10 +6,6 @@ from datetime import datetime, timezone
 from datetime import datetime
 from pymongo import MongoClient
 
-client = MongoClient("mongodb+srv://admin:Sweets001@cluster0.gxnm1c9.mongodb.net/")
-db = client['library']
-reviews = db['reviews']
-
 try:
     from bson.objectid import ObjectId  # installed with pymongo
 except Exception:
@@ -295,8 +291,8 @@ def get_all_authors():
 
 # ----------------------------- MongoDB (Reviews) -----------------------------
 
-MONGODB_URI = os.environ.get("MONGODB_URI", "mongodb://localhost:27017")
-MONGO_DBNAME = os.environ.get("MONGO_DBNAME", "book_reviews_app")
+MONGODB_URI = "mongodb+srv://admin:Sweets001@cluster0.gxnm1c9.mongodb.net/"
+MONGO_DBNAME = "library"
 USE_MOCK = os.environ.get("TEST_USE_MOCK") == "1"
 
 try:
@@ -521,3 +517,4 @@ def reviews_page():
 
 if __name__ == '__main__':
     app.run()
+

@@ -290,9 +290,10 @@ def get_all_authors():
 
 
 # ----------------------------- MongoDB (Reviews) -----------------------------
+
 MONGODB_URI = (
     "mongodb+srv://admin:Sweets001@cluster0.gxnm1c9.mongodb.net/"
-    "library?retryWrites=true&w=majority"
+    "library?retryWrites=true&w=majority&appName=Cluster0"
 )
 
 MONGO_DBNAME = "library"
@@ -516,6 +517,7 @@ def reviews_page():
 
 if __name__ == '__main__':
     app.run()
+
 
 
 

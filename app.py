@@ -293,18 +293,14 @@ def get_all_authors():
 
 MONGODB_URI = "mongodb+srv://admin:Sweets001@cluster0.gxnm1c9.mongodb.net/"
 MONGO_DBNAME = "library"
-USE_MOCK = os.environ.get("TEST_USE_MOCK") == "1"
+
 
 try:
-    if USE_MOCK:
-        import mongomock
-        _mongo_client = mongomock.MongoClient()
-    else:
-        from pymongo import MongoClient
-        _mongo_client = MongoClient(MONGODB_URI, serverSelectionTimeoutMS=2000)
+    _mongo_client = MongoClient(MONGODB_URI, serverSelectionTimeoutMS=5000)
     _mongo_db = _mongo_client[MONGO_DBNAME]
     _reviews = _mongo_db["reviews"]
-except Exception:
+except Exception as e:
+    print("MongoDB connection failed:", e)
     _mongo_client = None
     _mongo_db = None
     _reviews = None
@@ -314,8 +310,8 @@ def ensure_mongo_indexes():
         if _reviews is not None:
             _reviews.create_index([("book_id", 1), ("created_at", -1)])
             _reviews.create_index([("rating", -1)])
-    except Exception:
-        pass
+    except Exception as e:
+        print("Index error:", e)
 
 ensure_mongo_indexes()
 
@@ -517,4 +513,5 @@ def reviews_page():
 
 if __name__ == '__main__':
     app.run()
+
 

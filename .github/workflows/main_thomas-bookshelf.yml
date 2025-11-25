@@ -49,7 +49,7 @@ jobs:
 
     # 6) Deploy to Azure Web App
     - name: Deploy to Azure Web App
-      uses: azure/webapps-deploy@v2
+      uses: actions/upload-artifact@v3
       with:
-        app-name: "thomas-bookshelf"
-        package: app.zip
+        name: site
+        path: .

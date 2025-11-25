@@ -290,15 +290,18 @@ def get_all_authors():
 
 
 # ----------------------------- MongoDB (Reviews) -----------------------------
+MONGODB_URI = (
+    "mongodb+srv://admin:Sweets001@cluster0.gxnm1c9.mongodb.net/"
+    "library?retryWrites=true&w=majority"
+)
 
-MONGODB_URI = "mongodb+srv://admin:Sweets001@cluster0.gxnm1c9.mongodb.net/"
 MONGO_DBNAME = "library"
-
 
 try:
     _mongo_client = MongoClient(MONGODB_URI, serverSelectionTimeoutMS=5000)
     _mongo_db = _mongo_client[MONGO_DBNAME]
     _reviews = _mongo_db["reviews"]
+    print("MongoDB connected successfully")
 except Exception as e:
     print("MongoDB connection failed:", e)
     _mongo_client = None
@@ -513,5 +516,6 @@ def reviews_page():
 
 if __name__ == '__main__':
     app.run()
+
 
 
